@@ -1,0 +1,45 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@400;700&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Outfit", sans-serif;
+  
+  --color-brand-red: #8B0000;
+  --color-brand-gold: #C5A059;
+  --color-brand-amber: #FFBF00;
+}
+
+@layer base {
+  body {
+    @apply bg-neutral-950 text-neutral-100 selection:bg-brand-amber selection:text-neutral-950;
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  }
+}
+
+@layer components {
+  .cinematic-glow {
+    box-shadow: 0 0 30px rgba(197, 160, 89, 0.15);
+  }
+  
+  .glass-card {
+    @apply bg-neutral-900/50 backdrop-blur-md border border-neutral-800/50;
+  }
+  
+  .gradient-overlay {
+    background: linear-gradient(to top, rgba(10, 10, 10, 1) 0%, rgba(10, 10, 10, 0) 100%);
+  }
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-neutral-950;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-neutral-800 rounded-full hover:bg-neutral-700 transition-colors;
+}

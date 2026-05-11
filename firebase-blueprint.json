@@ -1,0 +1,60 @@
+{
+  "entities": {
+    "Event": {
+      "title": "Cultural Event",
+      "description": "An event occurrence in Karakalpakstan",
+      "type": "object",
+      "properties": {
+        "title": { "type": "string", "description": "Name of the event" },
+        "description": { "type": "string", "description": "Detailed description" },
+        "category": { "type": "string", "description": "Category slug (theater, cinema, etc.)" },
+        "date": { "type": "string", "format": "date", "description": "Date of event" },
+        "time": { "type": "string", "description": "Starting time" },
+        "location": { "type": "string", "description": "Venue name or address" },
+        "price": { "type": "string", "description": "Ticket price or 'Free'" },
+        "bannerImage": { "type": "string", "description": "URL to event banner" },
+        "isTopEvent": { "type": "boolean", "description": "Whether to feature in top events" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["title", "description", "category", "date", "time", "location", "price", "bannerImage"]
+    },
+    "Category": {
+      "title": "Event Category",
+      "description": "Grouping for events",
+      "type": "object",
+      "properties": {
+        "label": { "type": "object", "description": "Localized labels map" },
+        "slug": { "type": "string", "description": "Unique URL identifier" },
+        "icon": { "type": "string", "description": "Lucide icon name" }
+      },
+      "required": ["label", "slug", "icon"]
+    },
+    "User": {
+      "title": "App User",
+      "description": "Registered user profile",
+      "type": "object",
+      "properties": {
+        "displayName": { "type": "string" },
+        "email": { "type": "string" },
+        "role": { "type": "string", "enum": ["user", "admin"] },
+        "favoriteEvents": { "type": "array", "description": "List of favorite event IDs" }
+      },
+      "required": ["email", "role"]
+    }
+  },
+  "firestore": {
+    "/events/{eventId}": {
+      "schema": "Event",
+      "description": "Public list of cultural events"
+    },
+    "/categories/{categoryId}": {
+      "schema": "Category",
+      "description": "Static categories for events"
+    },
+    "/users/{userId}": {
+      "schema": "User",
+      "description": "Private user profiles"
+    }
+  }
+}
