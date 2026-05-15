@@ -22,7 +22,6 @@ const Header: React.FC = () => {
 
   const navItems = [
     { name: t('home'), path: '/' },
-    { name: t('events'), path: '/events' },
     { name: t('about'), path: '/about' },
     { name: t('contact'), path: '/contact' },
     ...(isAdmin ? [{ name: 'Admin', path: '/admin' }] : [])

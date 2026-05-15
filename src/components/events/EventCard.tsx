@@ -2,9 +2,10 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import { motion } from 'motion/react';
-import { Calendar, MapPin, Ticket } from 'lucide-react';
+import { Calendar, MapPin, Ticket, Heart } from 'lucide-react';
 import { Event } from '../../types';
 import { cn } from '../../lib/utils';
+import { useAuth } from '../../contexts/AuthContext';
 
 interface EventCardProps {
   event: Event;
@@ -13,6 +14,22 @@ interface EventCardProps {
 
 const EventCard: React.FC<EventCardProps> = ({ event, index }) => {
   const { t } = useTranslation();
+  const { user, updateUser } = useAuth();
+
+  const isFavorite = user?.favoriteEvents?.includes(event.id) || false;
+
+  const toggleFavorite = async (e: React.MouseEvent) => {
+    e.preventDefault(); // Prevent navigating to event details
+    if (!user) {
+      alert('Iltimas, birinshi akkauntqa kiriń!');
+      return;
+    }
+    const currentFavs = user.favoriteEvents || [];
+    const newFavs = isFavorite 
+      ? currentFavs.filter(id => id !== event.id)
+      : [...currentFavs, event.id];
+    await updateUser({ favoriteEvents: newFavs });
+  };
 
   return (
     <motion.div
@@ -35,6 +52,14 @@ const EventCard: React.FC<EventCardProps> = ({ event, index }) => {
         
         {/* Gradient Overlay */}
         <div className="absolute inset-0 bg-gradient-to-t from-neutral-950 via-neutral-950/40 to-transparent group-hover:from-neutral-950/90 transition-colors" />
+
+        {/* Favorite Button */}
+        <button 
+          onClick={toggleFavorite}
+          className="absolute top-4 right-4 z-10 p-3 rounded-full bg-black/40 backdrop-blur-md hover:bg-black/60 transition-colors border border-white/10"
+        >
+          <Heart className={cn("w-5 h-5", isFavorite ? "fill-brand-red text-brand-red" : "text-white")} />
+        </button>
 
         {/* Content */}
         <div className="absolute inset-0 p-6 flex flex-col justify-end">
