@@ -20,9 +20,17 @@ const HomePage: React.FC = () => {
   useEffect(() => {
     const fetchEvents = async () => {
       try {
-        setUpcomingEvents(STATIC_EVENTS);
+        const eventsRef = collection(db, 'events');
+        const snapshot = await getDocs(eventsRef);
+        if (!snapshot.empty) {
+          const dbEvents = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() } as Event));
+          setUpcomingEvents(dbEvents);
+        } else {
+          setUpcomingEvents(STATIC_EVENTS);
+        }
       } catch (error) {
         console.error("Failed to load events", error);
+        setUpcomingEvents(STATIC_EVENTS);
       } finally {
         setLoading(false);
       }
