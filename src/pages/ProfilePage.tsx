@@ -133,9 +133,6 @@ const ProfilePage: React.FC = () => {
                     <Heart className="w-16 h-16 text-neutral-700 mx-auto mb-4" />
                     <h3 className="text-xl font-bold mb-2">Házirshe hesh nárse joq</h3>
                     <p className="text-neutral-500 mb-6">Sizge unqan ilajlar usı jerde kórinedi</p>
-                    <Link to="/events" className="inline-block bg-brand-red px-8 py-3 rounded-full font-bold uppercase tracking-wider hover:bg-red-700 transition-colors">
-                      Ilajlardı kóriw
-                    </Link>
                   </div>
                 )}
               </motion.div>

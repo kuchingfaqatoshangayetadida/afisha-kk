@@ -14,7 +14,7 @@ const Header: React.FC = () => {
   const location = useLocation();
 
   const languages = [
-    { code: 'kaa', label: 'KK' },
+    { code: 'kaa', label: 'QQ' },
     { code: 'uz', label: 'UZ' },
     { code: 'ru', label: 'RU' },
     { code: 'en', label: 'EN' }
@@ -59,7 +59,7 @@ const Header: React.FC = () => {
           {/* Language Selector */}
           <div className="group relative flex items-center gap-2 bg-neutral-900 px-3 py-1.5 rounded-full border border-white/5 cursor-pointer">
             <Globe className="w-4 h-4 text-brand-amber" />
-            <span className="text-xs font-bold text-white uppercase">{i18n.language === 'kaa' ? 'KK' : i18n.language}</span>
+            <span className="text-xs font-bold text-white uppercase">{i18n.language === 'kaa' ? 'QQ' : i18n.language}</span>
             
             <div className="absolute top-full right-0 mt-2 w-24 bg-neutral-900 border border-white/10 rounded-lg overflow-hidden opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all">
               {languages.map((lang) => (
