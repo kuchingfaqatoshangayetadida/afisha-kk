@@ -29,12 +29,25 @@ export interface Category {
   icon: string;
 }
 
+export interface Booking {
+  id: string;
+  eventId: string;
+  eventTitle: string;
+  date: string;
+  time: string;
+  price: string;
+  row: number;
+  seat: number;
+  createdAt: any;
+}
+
 export interface AppUser {
   uid: string;
   name: string | null;
-  displayName?: string | null; // For transition
+  displayName?: string | null;
   email: string | null;
   role: 'user' | 'admin';
   favoriteEvents: string[];
+  bookings?: Booking[];
   createdAt: any;
 }

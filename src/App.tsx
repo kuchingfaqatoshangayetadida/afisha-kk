@@ -11,6 +11,7 @@ import LoginPage from './pages/LoginPage';
 import AdminPage from './pages/AdminPage';
 import AboutPage from './pages/AboutPage';
 import ContactPage from './pages/ContactPage';
+import ProfilePage from './pages/ProfilePage';
 import { initDummyData } from './lib/InitService';
 
 // Scroll to top on route change
@@ -45,6 +46,7 @@ function MainApp() {
           <Route path="/admin" element={<AdminPage />} />
           <Route path="/about" element={<AboutPage />} />
           <Route path="/contact" element={<ContactPage />} />
+          <Route path="/profile" element={<ProfilePage />} />
           {/* Fallback */}
           <Route path="*" element={<HomePage />} />
         </Routes>

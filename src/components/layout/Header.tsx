@@ -80,18 +80,30 @@ const Header: React.FC = () => {
 
           {/* User Auth */}
           {user ? (
-            <div className="flex items-center gap-4">
-              <Link to="/profile" className="flex items-center gap-2 hover:text-brand-gold">
+            <div className="group relative flex items-center gap-2 cursor-pointer py-2">
+              <div className="flex items-center gap-2 text-neutral-400 group-hover:text-brand-amber transition-colors">
                 <User className="w-5 h-5" />
                 <span className="text-sm font-medium">{user.displayName || user.email?.split('@')[0]}</span>
-              </Link>
-              <button 
-                onClick={() => auth.signOut()}
-                className="text-neutral-500 hover:text-red-500 transition-colors"
-                title="Logout"
-              >
-                <LogOut className="w-5 h-5" />
-              </button>
+              </div>
+              
+              <div className="absolute top-full right-0 mt-0 w-48 bg-neutral-900 border border-white/10 rounded-xl overflow-hidden opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all shadow-2xl py-2">
+                <Link to="/profile?tab=favorites" className="block px-4 py-2 text-sm font-bold text-neutral-300 hover:bg-white/5 hover:text-brand-amber transition-colors">
+                  Yoqtirganlar
+                </Link>
+                <Link to="/profile?tab=history" className="block px-4 py-2 text-sm font-bold text-neutral-300 hover:bg-white/5 hover:text-brand-amber transition-colors">
+                  Bronlar
+                </Link>
+                <Link to="/profile?tab=settings" className="block px-4 py-2 text-sm font-bold text-neutral-300 hover:bg-white/5 hover:text-brand-amber transition-colors">
+                  Sazlamalar
+                </Link>
+                <div className="h-[1px] bg-white/10 my-1" />
+                <button 
+                  onClick={() => auth.signOut()}
+                  className="w-full text-left px-4 py-2 text-sm font-bold text-neutral-500 hover:bg-red-500/10 hover:text-red-500 transition-colors flex items-center gap-2"
+                >
+                  <LogOut className="w-4 h-4" /> Chiqish
+                </button>
+              </div>
             </div>
           ) : (
             <Link 

@@ -8,6 +8,7 @@ interface AuthContextType {
   user: AppUser | null;
   loading: boolean;
   isAdmin: boolean;
+  updateUser: (updates: Partial<AppUser>) => Promise<void>;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -59,8 +60,19 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     return () => unsubscribe();
   }, []);
 
+  const updateUser = async (updates: Partial<AppUser>) => {
+    if (!user) return;
+    try {
+      const userDocRef = doc(db, 'users', user.uid);
+      await setDoc(userDocRef, updates, { merge: true });
+      setUser({ ...user, ...updates });
+    } catch (error) {
+      console.error("Error updating user:", error);
+    }
+  };
+
   return (
-    <AuthContext.Provider value={{ user, loading, isAdmin: user?.role === 'admin' }}>
+    <AuthContext.Provider value={{ user, loading, isAdmin: user?.role === 'admin', updateUser }}>
       {!loading ? children : (
         <div className="min-h-screen flex items-center justify-center bg-neutral-950">
           <div className="flex flex-col items-center gap-4">
