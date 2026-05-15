@@ -29,20 +29,8 @@ const ProfilePage: React.FC = () => {
 
   useEffect(() => {
     const fetchEvents = async () => {
-      try {
-        const eventsRef = collection(db, 'events');
-        const snapshot = await getDocs(eventsRef);
-        if (!snapshot.empty) {
-          const dbEvents = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() } as Event));
-          setAllEvents(dbEvents);
-        } else {
-          setAllEvents(STATIC_EVENTS);
-        }
-      } catch (error) {
-        setAllEvents(STATIC_EVENTS);
-      } finally {
-        setLoading(false);
-      }
+      setAllEvents(STATIC_EVENTS);
+      setLoading(false);
     };
     fetchEvents();
   }, []);

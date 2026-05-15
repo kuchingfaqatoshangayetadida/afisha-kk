@@ -16,20 +16,7 @@ const Hero: React.FC = () => {
 
   useEffect(() => {
     const fetchFeatured = async () => {
-      try {
-        const eventsRef = collection(db, 'events');
-        const q = query(eventsRef, limit(4));
-        const snapshot = await getDocs(q);
-        if (!snapshot.empty) {
-          const dbEvents = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() } as Event));
-          setFeaturedEvents(dbEvents);
-        } else {
-          setFeaturedEvents(STATIC_EVENTS.slice(0, 4));
-        }
-      } catch (error) {
-        console.error("Error fetching featured events:", error);
-        setFeaturedEvents(STATIC_EVENTS.slice(0, 4));
-      }
+      setFeaturedEvents(STATIC_EVENTS.slice(0, 4));
     };
     fetchFeatured();
   }, []);
